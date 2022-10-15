@@ -249,6 +249,7 @@ There are several most popular config file formats supported:
 - TOML (`.toml`)
 - EDN (`.edn`)
 - ENV (`.env`)
+- HJSON (`.hjson`)
 
 **Note**:
 - while using `.env` file the library will set corresponding data to process environment variables.

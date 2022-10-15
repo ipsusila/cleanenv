@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
+	"github.com/hjson/hjson-go/v4"
 	"github.com/joho/godotenv"
 	"gopkg.in/yaml.v3"
 	"olympos.io/encoding/edn"
@@ -124,6 +125,8 @@ func UpdateEnv(cfg interface{}) error {
 // - env
 //
 // - edn
+//
+// - hjson
 func parseFile(path string, cfg interface{}) error {
 	// open the configuration file
 	f, err := os.OpenFile(path, os.O_RDONLY|os.O_SYNC, 0)
@@ -142,6 +145,8 @@ func parseFile(path string, cfg interface{}) error {
 		err = parseTOML(f, cfg)
 	case ".edn":
 		err = parseEDN(f, cfg)
+	case ".hjson":
+		err = parseHJSON(f, cfg)
 	case ".env":
 		err = parseENV(f, cfg)
 	default:
@@ -172,6 +177,15 @@ func parseTOML(r io.Reader, str interface{}) error {
 // parseEDN parses EDN from reader to data structure
 func parseEDN(r io.Reader, str interface{}) error {
 	return edn.NewDecoder(r).Decode(str)
+}
+
+// parseHJSON parses HJSON from reader to data structure
+func parseHJSON(r io.Reader, str interface{}) error {
+	data, err := io.ReadAll(r)
+	if err != nil {
+		return err
+	}
+	return hjson.Unmarshal(data, str)
 }
 
 // parseENV, in fact, doesn't fill the structure with environment variable values.

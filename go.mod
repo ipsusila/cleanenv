@@ -2,6 +2,7 @@ module github.com/ilyakaznacheev/cleanenv
 
 require (
 	github.com/BurntSushi/toml v1.1.0
+	github.com/hjson/hjson-go/v4 v4.2.0
 	github.com/joho/godotenv v1.4.0
 	gopkg.in/yaml.v3 v3.0.1
 	olympos.io/encoding/edn v0.0.0-20201019073823-d3554ca0b0a3

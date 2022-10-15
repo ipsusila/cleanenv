@@ -644,6 +644,25 @@ two = 2`,
 		},
 
 		{
+			name: "hjson",
+			file: `{
+	// test config with comment
+	number: 1
+	float: 2.3
+	string: test
+	boolean: true	// field with comment
+	"object": {
+		one: 1
+		"two": 2
+	}
+	"array": [1, 2, 3]
+}`,
+			ext:     "hjson",
+			want:    &wantConfig,
+			wantErr: false,
+		},
+
+		{
 			name:    "unknown",
 			file:    "-",
 			ext:     "",
